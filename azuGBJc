@@ -1,0 +1,48 @@
+
+#include <PRIZM.h> 
+PRIZM prizm;
+
+#define Claw 1
+#define Elbow 2 
+#define Rack 1 //CR Servo
+
+void setup() {
+  prizm.PrizmBegin();
+}
+
+
+void loop() {
+SetClaw(90);
+delay(100);
+SetElbow(30)
+(delay(100)
+  //claw code goes to grab
+ int Distance2 = prizm.readSonicSensorCM(2);
+  if (Distance2 > 5){
+  RackRight(-100);
+  delay(100);
+}else{
+  RackRight(0);
+ ///claw code goes to release
+}
+
+}
+
+void SetClaw(int deg){
+  prizm.setServoPosition(Claw, deg);
+}
+
+void SetElbow(int deg){
+  prizm.setServoPosition(Elbow, deg);
+}
+
+
+void RackRight(int deg){
+  prizm.setCRServoState(Rack, deg);
+}
+
+void RackLeft(int deg){
+  int Distance1 = prizm.readSonicSensorCM(3);
+  if (Distance1 > 5 )
+  prizm.setCRServoState(Rack, deg);
+}
